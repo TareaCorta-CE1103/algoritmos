@@ -15,6 +15,8 @@ public class NodoB <dp extends Comparable<dp>>{
     private dp _dato;
     private NodoB _Hizq;
     private NodoB _Hder;
+    private double _FE;
+    private int _depth;
     
     public NodoB(dp dato){
         this._dato=dato;
@@ -26,6 +28,24 @@ public class NodoB <dp extends Comparable<dp>>{
      */
     public dp getDato(){
         return _dato;
+    }
+    
+    /**
+     * metodo para establecer el factor de equilibrio de un nodo
+     * metodo especifico para los arboles AVL
+     * @param fe recibe un dato tipo entero
+     */
+    public void setFE(double fe){
+        this._FE=fe;
+    }
+    
+    /**
+     * metodo para establecer la profundida del nodo, se utilizan unicamente
+     * en arboles AVL
+     * @param depth 
+     */
+    public void setDepth(int depth){
+        this._depth=depth;
     }
     
     /**
@@ -44,6 +64,23 @@ public class NodoB <dp extends Comparable<dp>>{
         this._Hder=hder;
     }
     
+    /**
+     * metodo que devuelve el factor de equilibrio del nodo, usado 
+     * unicamente con arboles AVL
+     * @return retorna un dato tipo int
+     */
+    public double getFE(){
+        return _FE;
+    }
+    
+    /**
+     * metodo devolver la profundida de los nodos, se utiliza especificamente
+     * para arboles AVL
+     * @return retorna un dato tipo int
+     */
+    public int getDepth(){
+        return _depth;
+    }
     /**
      * retorna el hijo izquierdo del nodo
      * @return retorna un dato tipo NodoB
