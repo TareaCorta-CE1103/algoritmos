@@ -15,6 +15,7 @@ public class NodoB <dp extends Comparable<dp>>{
     private dp _dato;
     private NodoB _Hizq;
     private NodoB _Hder;
+    private NodoB padre;
     private double _FE;
     private int _depth;
     
@@ -46,6 +47,14 @@ public class NodoB <dp extends Comparable<dp>>{
      */
     public void setDepth(int depth){
         this._depth=depth;
+    }
+    
+    /**
+     * metodo para establecer el padre de un nodo, se emplea en el arbol Splay
+     * @param padre padre es de la clase NodoB
+     */
+    public void setPadre(NodoB padre){
+        this.padre=padre;
     }
     
     /**
@@ -81,6 +90,15 @@ public class NodoB <dp extends Comparable<dp>>{
     public int getDepth(){
         return _depth;
     }
+    
+    /**
+     * metodo que devuelve el padre de los nodos de un arbol
+     * @return NodoB
+     */
+    public NodoB getPadre(){
+        return padre;
+    }
+    
     /**
      * retorna el hijo izquierdo del nodo
      * @return retorna un dato tipo NodoB

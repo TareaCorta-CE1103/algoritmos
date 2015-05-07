@@ -27,6 +27,10 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         }
     }
     
+    public NodoB getRoot(){
+        return _root;
+    }
+    
     /**
      * metodo recursivo para ir ingresando los nodos en el arbol
      * @param tmp nodo de arbol que contiene el padre de adonde se va a ingresar
@@ -34,14 +38,18 @@ public class Arbol_binario <dp extends Comparable<dp>> {
      */
     private void insertAux(NodoB tmp, dp dato){
         if(dato.compareTo((dp)tmp.getDato())<0){   
-            if(tmp.getHizq()==null)
+            if(tmp.getHizq()==null){
                 tmp.setHizq(new NodoB(dato));
+                tmp.getHizq().setPadre(tmp);
+            }
             else
                 insertAux(tmp.getHizq(),dato);
         }
         else if (dato.compareTo((dp)tmp.getDato())>0)
-            if(tmp.getHder()==null)
+            if(tmp.getHder()==null){
                 tmp.setHder(new NodoB(dato));
+                tmp.getHder().setPadre(tmp);
+            }
             else
                 insertAux(tmp.getHder(),dato);
     }
@@ -61,7 +69,9 @@ public class Arbol_binario <dp extends Comparable<dp>> {
      * @return devuelve el nodo que concuerda con el dato que ocupamos
      */
     private boolean findAux(NodoB tmp, dp dato){
-        if(tmp.getDato().compareTo(dato)<0){
+        if (tmp.getDato().compareTo(dato)==0)
+            return true;
+        else if(tmp.getDato().compareTo(dato)<0){
             if(tmp.getHder()==null)
                 return false;
             else
@@ -73,8 +83,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
             else 
                 return findAux(tmp.getHizq(), dato);
         }
-        else
-            return true;
+        return false;
     }
     
     /**
@@ -162,4 +171,18 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         System.out.println(tmp.getDato());
         printIOD(tmp.getHder());
     }
+    /**
+     * casos de prueba
+    public static void main(String[] args) {
+        Arbol_binario nuevo = new Arbol_binario();
+        nuevo.insert(5);
+        nuevo.insert(7);
+        nuevo.insert(4);
+        nuevo.insert(8);
+        nuevo.insert(6);
+        nuevo.insert(2);
+        System.out.println(nuevo.find(6));
+        nuevo.delete(6);
+        nuevo.print();
+    }*/
 }

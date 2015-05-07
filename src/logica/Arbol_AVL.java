@@ -17,6 +17,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     @Override
     public void insert(Comparable dato) {
         super.insert(dato);
+        _root= super.getRoot();
         check();
     }
     /**
@@ -29,9 +30,9 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         if(Hizq!=null&&Hder!=null)
             return Math.max(Hizq.getDepth(),Hder.getDepth());
         else if(Hizq!=null)
-            return Hizq.getDepth();
+            return Hizq.getDepth()+1;
         else if(Hder!=null)
-            return Hder.getDepth();
+            return Hder.getDepth()+1;
         else
             return 0;
     }
@@ -47,27 +48,46 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         if(Hizq!=null&&Hder!=null)
             return Hizq.getDepth()-Hder.getDepth();
         else if(Hizq!=null)
-            return Hizq.getDepth();
+            return Hizq.getDepth()+1;
         else if(Hder!=null)
-            return -Hder.getDepth();
+            return -Hder.getDepth()-1;
         else
             return 0;
     }
     
     /**
-     * metodo para realizar rotaciones simples a la derecha 
+     * metodo para realizar rotaciones simples a la izquierda 
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private void rotacionSDer(NodoB pNodo){
-        
+    private NodoB rotacionSDer(NodoB pNodo){
+        NodoB padre= pNodo.getPadre();
+        NodoB hder= pNodo.getHder();
+        NodoB maxMIn= pNodo.getHder().getHizq();
+        hder.setHizq(pNodo);
+        pNodo.setHder(maxMIn);
+        if(padre!=null && padre.getHder()==pNodo)
+            padre.setHder(hder);
+        else if(padre!=null && padre.getHizq()==pNodo)
+            padre.setHizq(hder);
+        return hder;
     }
     
     /**
-     * metodo para realizar rotacion simple a la izquiera
+     * metodo para realizar rotacion simple a la derecha
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private void rotacionSIzq(NodoB pNodo){
-        
+    private NodoB rotacionSIzq(NodoB pNodo){
+        NodoB padre=pNodo.getPadre();
+        NodoB hizq= pNodo.getHizq();
+        NodoB minMAx=pNodo.getHizq().getHder();
+        hizq.setHder(pNodo);
+        pNodo.setHizq(minMAx);
+        pNodo.setPadre(hizq);
+        if(padre.getHder()==pNodo && padre!=null)
+            padre.setHder(hizq);
+        else if(padre.getHizq()==pNodo && padre!=null)
+            padre.setHizq(hizq);
+        return hizq;
     }
     
     /**
@@ -88,12 +108,34 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         if(pNodo==null)
             return;
         checkAux(pNodo.getHizq());
+        checkAux(pNodo.getHder());
         pNodo.setDepth(Heigth(pNodo.getHizq(), pNodo.getHder()));
         pNodo.setFE(FactorEquilibrio(pNodo.getHizq(), pNodo.getHder()));
-        if(pNodo.getFE()>1)
-            rotacionSDer(pNodo);
-        else if(pNodo.getFE()<-1)
-            rotacionSIzq(pNodo);
-        checkAux(pNodo.getHder());
+        System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
+        if(pNodo==_root){
+            if(pNodo.getFE()>1)
+                _root=rotacionSIzq(pNodo);
+            else if(pNodo.getFE()<-1)
+                _root=rotacionSDer(pNodo);
+        }
+        else{
+            if(pNodo.getFE()>1)
+                rotacionSIzq(pNodo);
+            else if(pNodo.getFE()<-1)
+                rotacionSDer(pNodo);
+        }
+            
+        
+    }
+    
+    public static void main(String[] args) {
+        Arbol_AVL nuevo = new Arbol_AVL();
+        nuevo.insert(5);
+        nuevo.insert(7);
+        //nuevo.insert(4);
+        nuevo.insert(8);
+        nuevo.print();
+        //nuevo.insert(6);
+        //nuevo.insert(2);
     }
 }
