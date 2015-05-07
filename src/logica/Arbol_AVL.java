@@ -128,6 +128,20 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         
     }
     
+    @Override
+    public void print(){
+        NodoB tmp=_root;
+        printIOD(tmp);
+    }
+    
+    private void printIOD(NodoB tmp){
+        if(tmp==null)
+            return;
+        printIOD(tmp.getHizq());
+        System.out.println(tmp.getDato());
+        printIOD(tmp.getHder());
+    }
+    
     public static void main(String[] args) {
         Arbol_AVL nuevo = new Arbol_AVL();
         nuevo.insert(5);
