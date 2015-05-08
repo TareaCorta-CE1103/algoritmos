@@ -14,21 +14,26 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     
     private NodoB _root;
     
+    /**
+     * metodo sobre escrito de la clase padre para ingresar nodos en 
+     * un arbol AVL.
+     * @param dato dato generico
+     */
     @Override
     public void insert(Comparable dato) {
-        super.insert(dato);
-        _root= super.getRoot();
+        _root=super.insert(dato, _root);
         check();
     }
+    
     /**
-     * metodo para calcular la altura de 
-     * @param Hizq
-     * @param Hder
-     * @return 
+     * metodo privado para poder calcular la profundidad de cada nodo
+     * @param Hizq hijo izquierdo del nodo
+     * @param Hder hijo derecho del nodo
+     * @return retorna un dato int que se establece como profundidad del nodo
      */
     private int Heigth(NodoB Hizq, NodoB Hder){
         if(Hizq!=null&&Hder!=null)
-            return Math.max(Hizq.getDepth(),Hder.getDepth());
+            return Math.max(Hizq.getDepth(),Hder.getDepth())+1;
         else if(Hizq!=null)
             return Hizq.getDepth()+1;
         else if(Hder!=null)
@@ -56,7 +61,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     /**
-     * metodo para realizar rotaciones simples a la izquierda 
+     * metodo para realizar rotaciones simples a la Derecha 
      * @param pNodo recibe un dato del tipo NodoB
      */
     private NodoB rotacionSDer(NodoB pNodo){
@@ -73,7 +78,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     /**
-     * metodo para realizar rotacion simple a la derecha
+     * metodo para realizar rotacion simple a la Izquierda
      * @param pNodo recibe un dato del tipo NodoB
      */
     private NodoB rotacionSIzq(NodoB pNodo){
@@ -82,16 +87,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         NodoB minMAx=pNodo.getHizq().getHder();
         hizq.setHder(pNodo);
         pNodo.setHizq(minMAx);
-        pNodo.setPadre(hizq);
-        if(padre.getHder()==pNodo && padre!=null)
+        if(padre!=null && padre.getHder()==pNodo)
             padre.setHder(hizq);
-        else if(padre.getHizq()==pNodo && padre!=null)
+        else if(padre!=null && padre.getHizq()==pNodo)
             padre.setHizq(hizq);
         return hizq;
     }
     
     /**
-     * metodo para establce y revisar la altura de los nodos
+     * metodo privado para establecer y revisar la altura de los nodos
      * este mismo realiza las rotaciones.
      */
     private void check(){
@@ -124,32 +128,26 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
             else if(pNodo.getFE()<-1)
                 rotacionSDer(pNodo);
         }
-            
-        
     }
     
+    /**
+     * metodo sobreescrito para imprimir en preorden los nodos de un arbol
+     */
     @Override
     public void print(){
-        NodoB tmp=_root;
-        printIOD(tmp);
+        super.print(_root);
     }
     
-    private void printIOD(NodoB tmp){
-        if(tmp==null)
-            return;
-        printIOD(tmp.getHizq());
-        System.out.println(tmp.getDato());
-        printIOD(tmp.getHder());
-    }
-    
+     /* pruebas unitarias del arbol AVL
     public static void main(String[] args) {
         Arbol_AVL nuevo = new Arbol_AVL();
+        nuevo.insert(10);
         nuevo.insert(5);
-        nuevo.insert(7);
-        //nuevo.insert(4);
-        nuevo.insert(8);
+        nuevo.insert(15);
+        nuevo.insert(13);
+        nuevo.insert(20);
+        nuevo.insert(19);
+        nuevo.insert(22);
         nuevo.print();
-        //nuevo.insert(6);
-        //nuevo.insert(2);
-    }
+    }*/
 }

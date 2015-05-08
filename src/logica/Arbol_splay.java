@@ -16,7 +16,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
 
     @Override
     public void insert(Comparable dato) {
-        super.insert(dato);
+        _root=super.insert(dato, _root);
         splay(dato);
     }
     
@@ -30,20 +30,34 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     private NodoB splayAux(NodoB ToRoot){
-        if(ToRoot.getPadre()==null)
-            return ToRoot;
         if(ToRoot.getPadre().getPadre()==null){
-            if(ToRoot.getHder()==ToRoot)
-                Zig(ToRoot);
-            else
+            if(ToRoot.getPadre().getHder()==ToRoot)
                 Zag(ToRoot);
+            else
+                Zig(ToRoot);
         }
         else{
-            
+            if(ToRoot.getPadre().getPadre().getHder()==ToRoot.getPadre()){
+                if(ToRoot.getPadre().getHder()==ToRoot)
+                    ZagZag(ToRoot);
+                else{
+                    Zig(ToRoot);
+                    Zag(ToRoot);
+                }
+            }
+            else{
+                if(ToRoot.getPadre().getHizq()==ToRoot)
+                    ZigZig(ToRoot);
+                else{
+                    Zag(ToRoot);
+                    Zig(ToRoot);
+                }
+            }
         }
         if(ToRoot.getPadre()!=null)
             return splayAux(ToRoot);
-        return null;
+        else
+            return ToRoot;
     }
     
     private void Zig(NodoB pNodo){
@@ -113,5 +127,22 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
                 return FindAux(pNodo.getHizq(), pDato);
         }
         return null;
-    } 
+    }
+
+    @Override
+    public void print() {
+        super.print(_root);
+    }
+    
+    public static void main(String[] args) {
+        Arbol_splay nuevo = new Arbol_splay();
+        nuevo.insert(10);
+        nuevo.insert(5);
+        //nuevo.insert(15);
+        //nuevo.insert(13);
+        //nuevo.insert(20);
+        //nuevo.insert(19);
+        //nuevo.insert(22);
+        nuevo.print();
+    }
 }

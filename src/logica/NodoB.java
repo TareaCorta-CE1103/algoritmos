@@ -18,6 +18,7 @@ public class NodoB <dp extends Comparable<dp>>{
     private NodoB padre;
     private double _FE;
     private int _depth;
+    private int color;
     
     public NodoB(dp dato){
         this._dato=dato;
