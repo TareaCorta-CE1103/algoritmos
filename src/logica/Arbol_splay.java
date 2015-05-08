@@ -30,7 +30,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     private NodoB splayAux(NodoB ToRoot){
-        if(ToRoot.getPadre().getPadre()==null){
+        if(ToRoot.getPadre()!=null && ToRoot.getPadre().getPadre()==null){
             if(ToRoot.getPadre().getHder()==ToRoot)
                 Zag(ToRoot);
             else

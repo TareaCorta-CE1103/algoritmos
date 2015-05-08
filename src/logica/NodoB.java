@@ -75,6 +75,22 @@ public class NodoB <dp extends Comparable<dp>>{
     }
     
     /**
+     * metodo para establecer el color del nodo de un arbol rojo y negro
+     * @param color 1 para rojo y 0 para negro
+     */
+    public void setColor(int color){
+        this.color=color;
+    }
+    
+    /**
+     * metodo para retornar el color de una nodo
+     * @return retorna un int, 1 para rjo y 0 para negro. 
+     */
+    public int getColor(){
+        return color;
+    }
+    
+    /**
      * metodo que devuelve el factor de equilibrio del nodo, usado 
      * unicamente con arboles AVL
      * @return retorna un dato tipo int
