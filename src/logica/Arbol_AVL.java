@@ -68,12 +68,14 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         NodoB padre= pNodo.getPadre();
         NodoB hder= pNodo.getHder();
         NodoB maxMIn= pNodo.getHder().getHizq();
+        hder.setPadre(padre);
         hder.setHizq(pNodo);
         pNodo.setHder(maxMIn);
         if(padre!=null && padre.getHder()==pNodo)
             padre.setHder(hder);
         else if(padre!=null && padre.getHizq()==pNodo)
             padre.setHizq(hder);
+        maxMIn.setPadre(pNodo);
         return hder;
     }
     
@@ -86,6 +88,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         NodoB hizq= pNodo.getHizq();
         NodoB minMAx=pNodo.getHizq().getHder();
         hizq.setHder(pNodo);
+        hizq.setPadre(padre);
         pNodo.setHizq(minMAx);
         if(padre!=null && padre.getHder()==pNodo)
             padre.setHder(hizq);
@@ -115,7 +118,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         checkAux(pNodo.getHder());
         pNodo.setDepth(Heigth(pNodo.getHizq(), pNodo.getHder()));
         pNodo.setFE(FactorEquilibrio(pNodo.getHizq(), pNodo.getHder()));
-        System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
+        //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
         if(pNodo==_root){
             if(pNodo.getFE()>1)
                 _root=rotacionSIzq(pNodo);
