@@ -181,6 +181,11 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             hderP.setPadre(abuelo);
     }
     
+    /**
+     * metodo para hacer un rotacion entre el hijo y el padre hacia la izquierda
+     * y el hijo y el abuelo hacia la derecha.
+     * @param pNodo recibe un dato de la clase de NodoB
+     */
     private void ZigZag(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
         NodoB padre= pNodo.getPadre();
@@ -205,6 +210,11 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             hder.setPadre(padre);
     }
     
+    /**
+     * metodo para hacer una rotacion hacia la derecha entre el hijo y el padre
+     * y una rotacion hacia la izquierda entre el hijo y el abuelo.
+     * @param pNodo 
+     */
     private void ZagZig(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
         NodoB padre= pNodo.getPadre();
@@ -290,24 +300,4 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
         super.print(_root);
         //System.out.println("raiz: "+ _root.getDato());
     }
-    
-    /**
-     * casos de prueba
-    public static void main(String[] args) {
-        long TI=System.nanoTime();
-        Arbol_splay nuevo = new Arbol_splay();
-        nuevo.insert(10);
-        nuevo.insert(5);
-        nuevo.insert(15);
-        nuevo.insert(13);
-        nuevo.insert(20);
-        nuevo.insert(19);
-        nuevo.insert(22);
-        //nuevo.print();
-        nuevo.insert(5);
-        nuevo.insert(10);
-        long TF=System.nanoTime();
-        System.out.println((TF-TI)*0.000001);
-        //nuevo.print();
-    }*/
 }

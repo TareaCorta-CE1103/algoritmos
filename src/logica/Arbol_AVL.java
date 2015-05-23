@@ -61,10 +61,10 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     /**
-     * metodo para realizar rotaciones simples a la Derecha 
+     * metodo para realizar rotaciones simples a la Izquierda
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private NodoB rotacionSDer(NodoB pNodo){
+    private NodoB rotacionSIzq(NodoB pNodo){
         NodoB padre= pNodo.getPadre();
         NodoB hder= pNodo.getHder();
         NodoB maxMIn= pNodo.getHder().getHizq();
@@ -75,15 +75,16 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
             padre.setHder(hder);
         else if(padre!=null && padre.getHizq()==pNodo)
             padre.setHizq(hder);
-        maxMIn.setPadre(pNodo);
+        if(maxMIn!=null)
+            maxMIn.setPadre(pNodo);
         return hder;
     }
     
     /**
-     * metodo para realizar rotacion simple a la Izquierda
+     * metodo para realizar rotacion simple a la Derecha
      * @param pNodo recibe un dato del tipo NodoB
      */
-    private NodoB rotacionSIzq(NodoB pNodo){
+    private NodoB rotacionSDer(NodoB pNodo){
         NodoB padre=pNodo.getPadre();
         NodoB hizq= pNodo.getHizq();
         NodoB minMAx=pNodo.getHizq().getHder();
@@ -94,6 +95,8 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
             padre.setHder(hizq);
         else if(padre!=null && padre.getHizq()==pNodo)
             padre.setHizq(hizq);
+        if(minMAx!=null)
+            minMAx.setPadre(pNodo);
         return hizq;
     }
     
@@ -121,15 +124,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
         if(pNodo==_root){
             if(pNodo.getFE()>1)
-                _root=rotacionSIzq(pNodo);
-            else if(pNodo.getFE()<-1)
                 _root=rotacionSDer(pNodo);
+            else if(pNodo.getFE()<-1)
+                _root=rotacionSIzq(pNodo);
         }
         else{
             if(pNodo.getFE()>1)
-                rotacionSIzq(pNodo);
-            else if(pNodo.getFE()<-1)
                 rotacionSDer(pNodo);
+            else if(pNodo.getFE()<-1)
+                rotacionSIzq(pNodo);
         }
     }
     
@@ -141,16 +144,4 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         super.print(_root);
     }
     
-     /* pruebas unitarias del arbol AVL
-    public static void main(String[] args) {
-        Arbol_AVL nuevo = new Arbol_AVL();
-        nuevo.insert(10);
-        nuevo.insert(5);
-        nuevo.insert(15);
-        nuevo.insert(13);
-        nuevo.insert(20);
-        nuevo.insert(19);
-        nuevo.insert(22);
-        nuevo.print();
-    }*/
 }
