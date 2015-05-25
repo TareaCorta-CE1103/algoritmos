@@ -13,6 +13,15 @@ package logica;
 public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     
     private NodoB _root;
+    
+    /**
+     * metodo para retornar la raiz y realizar recorridos en el arbol.
+     * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
+     * arbol.
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
 
     /**
      * metodo sobre-escrito de la clase Arbol binario para ingresar nodos 
