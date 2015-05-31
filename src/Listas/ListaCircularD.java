@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logica;
+package Listas;
 
 /**
  *
  * @author osboxes
  */
-public class NodoUrl extends NodoB{
-
-    public NodoUrl(Comparable dato) {
-        super(dato);
-    }
-    
+public class ListaCircularD {
     
 }
