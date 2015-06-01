@@ -10,56 +10,26 @@ package Arboles;
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_RN extends Arbol_binario implements Constantes{
+public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles implements Constantes{
     
     private NodoB _root;
 
     /**
      * metodo para ingresar nodos en el arbol rojo y negro
-     * @param pNodo dato perteneciente a la clase NodoB, el nodo que queremos 
+     * @param pDato  dato perteneciente a la clase NodoB, el nodo que queremos 
      * ingresar.
-     */
-    public void insert(NodoB pNodo){
-        if(_root==null){
-            _root=pNodo;
-            changeColor(_root);
-        }
-        else{
-            insertAux(_root, pNodo);
-        }
-        check(pNodo);
-    }
-    
-    /**
-     * metodo recursivo para ingresar el nodo en el arbol
-     * @param pPadre dato perteciente a la clase NodoB,nodo con el que se 
-     * compara, incialemnte es la raiz.
-     * @param pDato dato perteneciente a la clase NodoB, nodo que queremos 
-     * ingresar.
-     */
-    private void insertAux(NodoB pPadre, NodoB pDato){
-        if(pDato.getDato().compareTo(pPadre.getDato())<0){   
-            if(pPadre.getHizq()==null){
-                pPadre.setHizq(pDato);
-                pPadre.getHizq().setPadre(pPadre);
-            }
-            else
-                insertAux(pPadre.getHizq(),pDato);
-        }
-        else if (pDato.getDato().compareTo(pPadre.getDato())>0)
-            if(pPadre.getHder()==null){
-                pPadre.setHder(pDato);
-                pPadre.getHder().setPadre(pPadre);
-            }
-            else
-                insertAux(pPadre.getHder(),pDato);
+     *
+    public void insert(dp pDato){
+        _root=super.insert(pDato, _root);
+        check();
     }
     
     /**
      * metodo para revisar que el arbol se encuentre de manera correcta.
      * @param pNodo dato de la clase NodoB, nodo que queremos revisar.
      */
-    private void check(NodoB pNodo){
+    private void check(dp pDato){
+        NodoB pNodo=new NodoB(pDato);
         if(pNodo==_root)
             return;
         checkAux(pNodo, pNodo.getPadre());
@@ -142,108 +112,6 @@ public class Arbol_RN extends Arbol_binario implements Constantes{
                 }
             }
         }
-    }
-    
-    /**
-     * metodo para realizar una rotacion simple hacia la izquierda, 
-     * @param pNodo nodo el cual esta generando problemas para realizar la 
-     * rotacion.
-     * @return retorna el nodo que ahora sera la cabeza de la rotacion.
-     */
-     private NodoB rotacionSIzq(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hder= pNodo.getHder();
-        NodoB maxMIn= pNodo.getHder().getHizq();
-        hder.setPadre(padre);
-        hder.setHizq(pNodo);
-        pNodo.setPadre(hder);
-        pNodo.setHder(maxMIn);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(hder);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(hder);
-        if(maxMIn!=null)
-            maxMIn.setPadre(pNodo);
-        return hder;
-    }
-    
-    /**
-     * metodo para realizar rotacion simple a la Derecha
-     * @param pNodo recibe un dato del tipo NodoB
-     */
-    private NodoB rotacionSDer(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizq= pNodo.getHizq();
-        NodoB minMAx= pNodo.getHizq().getHder();
-        hizq.setHder(pNodo);
-        hizq.setPadre(padre);
-        pNodo.setPadre(hizq);
-        pNodo.setHizq(minMAx);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(hizq);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(hizq);
-        if(minMAx!=null)
-            minMAx.setPadre(pNodo);
-        return hizq;
-    }
-    
-    /**
-     * metodo para realizar una doble rotacion hacia la derecha.
-     * @param pNodo este dato pertenece a la clase NodoUrl.
-     * @return retorna el nodo que ahora es la cabeza del movimiento.
-     */
-    private NodoB rotacionDDer(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizqG= pNodo.getHizq().getHder().getHizq();
-        NodoB hderG= pNodo.getHizq().getHder().getHder();
-        NodoB hizq= pNodo.getHizq();
-        NodoB toHead= pNodo.getHizq().getHder();
-        toHead.setPadre(padre);
-        toHead.setHizq(hizq);
-        toHead.setHder(pNodo);
-        hizq.setPadre(toHead);
-        hizq.setHder(hizqG);
-        pNodo.setPadre(toHead);
-        pNodo.setHizq(hderG);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(toHead);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(toHead);
-        if(hderG!=null)
-            hderG.setPadre(pNodo);
-        if (hizqG!=null)
-            hizqG.setPadre(hizq);
-        return toHead;
-    }
-    
-    /**
-     * metodo para realizar rotaciones hacia la izquierda.
-     * @param pNodo dato que pertenece a la clase NodoUrl.
-     * @return retorna el nodo que ahora es la cabeza del movimiento.
-     */
-    private NodoB rotacionDIzq(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hizqG= pNodo.getHder().getHizq().getHizq();
-        NodoB hderG= pNodo.getHder().getHizq().getHder();
-        NodoB hder= pNodo.getHder();
-        NodoB toHead= pNodo.getHder().getHizq();
-        toHead.setPadre(padre);
-        toHead.setHder(hder);
-        toHead.setHizq(pNodo);
-        hder.setPadre(toHead);
-        hder.setHizq(hderG);
-        pNodo.setPadre(toHead);
-        pNodo.setHder(hizqG);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(toHead);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(toHead);
-        if(hderG!=null)
-            hderG.setPadre(hder);
-        if (hizqG!=null)
-            hizqG.setPadre(pNodo);
-        return toHead;
     }
     
     /**

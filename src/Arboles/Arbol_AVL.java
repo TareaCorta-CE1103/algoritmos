@@ -10,7 +10,7 @@ package Arboles;
  * @author osboxes
  * @param <dp>
  */
-public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
+public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
     
     private NodoB _root;
     
@@ -61,46 +61,6 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
     }
     
     /**
-     * metodo para realizar rotaciones simples a la Izquierda
-     * @param pNodo recibe un dato del tipo NodoB
-     */
-    private NodoB rotacionSIzq(NodoB pNodo){
-        NodoB padre= pNodo.getPadre();
-        NodoB hder= pNodo.getHder();
-        NodoB maxMIn= pNodo.getHder().getHizq();
-        hder.setPadre(padre);
-        hder.setHizq(pNodo);
-        pNodo.setHder(maxMIn);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(hder);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(hder);
-        if(maxMIn!=null)
-            maxMIn.setPadre(pNodo);
-        return hder;
-    }
-    
-    /**
-     * metodo para realizar rotacion simple a la Derecha
-     * @param pNodo recibe un dato del tipo NodoB
-     */
-    private NodoB rotacionSDer(NodoB pNodo){
-        NodoB padre=pNodo.getPadre();
-        NodoB hizq= pNodo.getHizq();
-        NodoB minMAx=pNodo.getHizq().getHder();
-        hizq.setHder(pNodo);
-        hizq.setPadre(padre);
-        pNodo.setHizq(minMAx);
-        if(padre!=null && padre.getHder()==pNodo)
-            padre.setHder(hizq);
-        else if(padre!=null && padre.getHizq()==pNodo)
-            padre.setHizq(hizq);
-        if(minMAx!=null)
-            minMAx.setPadre(pNodo);
-        return hizq;
-    }
-    
-    /**
      * metodo privado para establecer y revisar la altura de los nodos
      * este mismo realiza las rotaciones.
      */
@@ -123,25 +83,38 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends Arbol_binario{
         pNodo.setFE(FactorEquilibrio(pNodo.getHizq(), pNodo.getHder()));
         //System.out.println("Profundidad: "+pNodo.getDepth()+"; Factor de equilibrio: "+ pNodo.getFE());
         if(pNodo==_root){
-            if(pNodo.getFE()>1)
-                _root=rotacionSDer(pNodo);
-            else if(pNodo.getFE()<-1)
-                _root=rotacionSIzq(pNodo);
+            if(pNodo.getFE()>=2){
+                if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
+                    _root=rotacionSDer(pNodo);
+                else
+                   _root=rotacionDDer(pNodo);
+            }
+            else if(pNodo.getFE()<=-2)
+                if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
+                    _root=rotacionSIzq(pNodo);
+                else
+                    _root=rotacionDIzq(pNodo);
         }
         else{
-            if(pNodo.getFE()>1)
-                rotacionSDer(pNodo);
-            else if(pNodo.getFE()<-1)
-                rotacionSIzq(pNodo);
+            if(pNodo.getFE()>=2){
+                if((pNodo.getFE()+pNodo.getHizq().getFE())>pNodo.getFE())
+                    rotacionSDer(pNodo);
+                else
+                    rotacionDDer(pNodo);
+            }
+            else if(pNodo.getFE()<=-2)
+                if((pNodo.getFE()+pNodo.getHder().getFE())<pNodo.getFE())
+                    rotacionSIzq(pNodo);
+                else
+                    rotacionDIzq(pNodo);
         }
     }
     
     /**
-     * metodo sobreescrito para imprimir en preorden los nodos de un arbol
+     * metodo sobreescrito para imprimir en orden los nodos de un arbol
      */
     @Override
     public void print(){
         super.print(_root);
     }
-    
 }

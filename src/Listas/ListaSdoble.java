@@ -5,6 +5,7 @@
  */
 package Listas;
 
+import Arboles.Constantes;
 /**
  * clase de lista que sive como padre para todas las otras otras clases
  * que hagan listas o sirvan como bases de datos.
@@ -12,7 +13,7 @@ package Listas;
  * @author osboxes <------asi se llama la maquina virtual en ubuntu
  * @param <dp>
  */
-public class ListaSdoble <dp extends Comparable<dp>>{
+public class ListaSdoble <dp extends Comparable<dp>> implements Constantes{
     
     private Nodo _head;
     private Nodo _tail;
@@ -30,7 +31,6 @@ public class ListaSdoble <dp extends Comparable<dp>>{
             tmp1.setNext( new Nodo(dato));
             _tail=(Nodo)tmp1.getNext();
             _tail.setPrev(tmp1);
-            _tail.setNext(_head);
         }
     }
     
@@ -59,8 +59,7 @@ public class ListaSdoble <dp extends Comparable<dp>>{
     public void deQueue(dp dato){
         Nodo tmp=_head;
         Nodo tmp2=tmp;
-        int cont=0;
-        while(cont<=2 && !tmp.getData().equals(dato)){
+        while(tmp!=null && !tmp.getData().equals(dato)){
             tmp2=tmp;
             tmp=tmp.getNext();
         }
@@ -83,15 +82,12 @@ public class ListaSdoble <dp extends Comparable<dp>>{
      */
     public int getLength(){
         Nodo tmp=_head;
-        int i =0;
-        int cont=0;
-        while(cont<=2){
-            if(tmp==_head)
-                cont++;
+        int i =cero;
+        while(tmp!=null){
             i++;
             tmp= tmp.getNext();
         }
-        return i-1;
+        return i;
     }
     
     public void print(){
@@ -109,12 +105,11 @@ public class ListaSdoble <dp extends Comparable<dp>>{
      */
     public dp find(dp dato){
         Nodo tmp =_head;
-        int cont=0;
-        while(cont<=2||tmp.getData().equals(dato)){
-            if(tmp==_head)
-                cont++;
+        while(tmp!=null && !tmp.getData().equals(dato))
             tmp=tmp.getNext();
-        }
-        return (dp)tmp.getData();
+        if (tmp!=null)
+            return (dp)tmp.getData();
+        else
+            return null;
     }
 }
