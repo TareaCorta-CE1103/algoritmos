@@ -18,10 +18,11 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
      * metodo para ingresar nodos en el arbol rojo y negro
      * @param pDato  dato perteneciente a la clase NodoB, el nodo que queremos 
      * ingresar.
-     *
-    public void insert(dp pDato){
-        _root=super.insert(pDato, _root);
-        check();
+    }*/
+    
+    @Override
+    public void insert(Comparable pDato) {
+        _root=super.insert(pDato,_root); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**
