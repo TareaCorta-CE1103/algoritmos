@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Listas;
+package simple;
 
-import Arboles.Constantes;
+import tree.Constantes;
 
 /**
  *
@@ -61,8 +61,10 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
         Nodo tmp=_head;
         Nodo tmp2= tmp;
         _cont=cero;
-        while(_cont<dos && !tmp.getData().equals(dato))
+        while(_cont<dos && !tmp.getData().equals(dato)){
+            tmp2=tmp;
             tmp=tmp.getNext();
+        }
         if(_cont==dos)
             return;
         else if(tmp==_head){

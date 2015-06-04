@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Listas;
+package simple;
 
-import Arboles.Constantes;
+import sort.Metodos;
+import tree.Constantes;
+
 /**
  * clase de lista que sive como padre para todas las otras otras clases
  * que hagan listas o sirvan como bases de datos.
@@ -13,7 +15,8 @@ import Arboles.Constantes;
  * @author osboxes <------asi se llama la maquina virtual en ubuntu
  * @param <dp>
  */
-public class ListaSdoble <dp extends Comparable<dp>> implements Constantes{
+public class ListaSdoble <dp extends Comparable<dp>> extends Metodos 
+implements Constantes{
     
     private Nodo _head;
     private Nodo _tail;
@@ -25,11 +28,12 @@ public class ListaSdoble <dp extends Comparable<dp>> implements Constantes{
     public void enQueue(dp dato){
         if (_head==null){
             _head=_tail=new Nodo(dato);
+            _tail.setPrev(_head);
         }
         else{
             Nodo tmp1=_tail;
             tmp1.setNext( new Nodo(dato));
-            _tail=(Nodo)tmp1.getNext();
+            _tail=tmp1.getNext();
             _tail.setPrev(tmp1);
         }
     }
@@ -65,13 +69,14 @@ public class ListaSdoble <dp extends Comparable<dp>> implements Constantes{
         }
         if(tmp==null)
             return;
-        else if(tmp==tmp2 && tmp.getData().equals(dato))
-            _head=(Nodo)_head.getData();
+        else if(tmp==tmp2){
+            _head=_head.getNext();
+            _head.setPrev(null);
+        }
         else{
-            if(tmp2.getData().equals(dato))
-                tmp2.setNext(tmp.getNext());
-            else
-                return;
+            Nodo next= tmp.getNext();
+            tmp2.setNext(next);
+            next.setPrev(tmp2);
         }
     }
     
@@ -111,5 +116,23 @@ public class ListaSdoble <dp extends Comparable<dp>> implements Constantes{
             return (dp)tmp.getData();
         else
             return null;
+    }
+    
+    public void insertSort(){
+        super.insertSort(this); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static void main(String[] args) {
+        ListaSdoble nuevo = new ListaSdoble();
+        nuevo.enQueue(5);
+        nuevo.enQueue(14);
+        nuevo.enQueue(78);
+        nuevo.enQueue(34);
+        nuevo.enQueue(3);
+        nuevo.enQueue(1);
+        nuevo.enQueue(56);
+        nuevo.enQueue(7);
+        nuevo.insertSort();
+        nuevo.print();
     }
 }

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Listas;
+package simple;
 
-import Arboles.Constantes;
+import tree.Constantes;
+
 /**
  *
  * @author osboxes
@@ -21,9 +22,8 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
      * @param dato 
      */
     public void enQueue(dp dato){
-        if (_head==null){
+        if (_head==null)
             _head=_tail=new Nodo(dato);
-        }
         else{
             Nodo tmp1=_tail;
             tmp1.setNext( new Nodo(dato));
@@ -63,13 +63,9 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
         if(tmp==null)
             return;
         else if(tmp==tmp2 && tmp.getData().equals(dato))
-            _head=(Nodo)_head.getData();
-        else{
-            if(tmp2.getData().equals(dato))
-                tmp2.setNext(tmp.getNext());
-            else
-                return;
-        }
+            _head=_head.getNext();
+        else
+            tmp2.setNext(tmp.getNext());
     }
     
     /**
