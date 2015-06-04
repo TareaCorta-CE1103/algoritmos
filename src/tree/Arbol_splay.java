@@ -13,7 +13,7 @@ package tree;
 public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     
     private NodoB _root;
-    
+    private boolean _ifPadre;
     /**
      * metodo para retornar la raiz y realizar recorridos en el arbol.
      * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
@@ -43,11 +43,20 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
      */
     private void splay(Comparable pDato){
         NodoB ToRoot=Find(pDato);
-        if(ToRoot==null || ToRoot==_root)
+        if(!_ifPadre || ToRoot==_root)
             return;
         else{
             _root=splayAux(ToRoot);
         }
+    }
+    
+    /**
+     * metodo para realizar las verificaciones de si tenemos que rotar los nodos
+     * del arbol para que un cierto nodo llegue a la raiz.
+     * @param pNodo 
+     */
+    private void splay(NodoB pNodo){
+         _root=splayAux(pNodo);
     }
     
     /**
@@ -255,9 +264,23 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
      */
     @Override
     public void delete(Comparable dato) {
-        NodoB tmp= Find(dato).getPadre();
-        _root=super.delete(dato, _root);
-        splay(tmp.getDato());
+        NodoB tmp= Find(dato);
+        if(_ifPadre){
+            _root=super.delete(dato, _root);
+            splay(tmp.getPadre());
+        }
+        else{
+            splay(tmp);
+        }
+    }
+    
+    /**
+     * metodo para realizar una busqueda en el arbol
+     * @param dato 
+     */
+    public void search(Comparable dato){
+        NodoB tmp = Find(dato);
+        splay(tmp);
     }
     
     /**
@@ -283,17 +306,23 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
      * @return retorna el nodo que haya sido igual.
      */
     private NodoB FindAux(NodoB pNodo, Comparable pDato){
-        if(pNodo.getDato().compareTo(pDato)==0)
+        if(pNodo.getDato().compareTo(pDato)==0){
+            _ifPadre=true;
             return pNodo;
+        }
         if(pNodo.getDato().compareTo(pDato)<0){
-            if(pNodo.getHder()==null)
-                return null;
+            if(pNodo.getHder()==null){
+                _ifPadre=false;
+                return pNodo;
+            }
             else
                 return FindAux(pNodo.getHder(), pDato);
         }
         if(pNodo.getDato().compareTo(pDato)>0){
-            if(pNodo.getHizq()==null)
-                return null;
+            if(pNodo.getHizq()==null){
+                _ifPadre=false;
+                return pNodo;
+            }
             else 
                 return FindAux(pNodo.getHizq(), pDato);
         }

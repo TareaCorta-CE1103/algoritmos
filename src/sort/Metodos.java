@@ -15,6 +15,36 @@ import simple.Nodo;
  */
 public class Metodos <dp extends Comparable<? super dp>>{
     
+    /**
+     * metodo para realizar un ordenamiento tipo burbuja
+     * @param pArray arreglo con datos enteros.
+     */
+    public void bubbleSort(int[] pArray){
+        int out, in;
+        for(out=pArray.length-1; out>1; out--)
+            for(in=0; in<out; in++)
+                if( pArray[in] > pArray[in+1] ){
+                    swap(pArray, in, in+1);
+                }
+    }
+    
+    /**
+     * metodo para realizar un intercambio de datos.
+     * @param pArray arreglo sobre el cual trabajamos.
+     * @param first dato primero a cambiar.
+     * @param last dato segundo a cambiar.
+     */
+    private void swap(int[] pArray, int first, int last){
+        int temp= pArray[first];
+        pArray[first]=pArray[last];
+        pArray[last]=temp;
+    }
+    
+    /**
+     * metodo para realizar un ordenamiento de insercion adaptado para listas 
+     * simples dobles.
+     * @param pLista dato de la clase lista simple doble.
+     */
     public void insertSort(ListaSdoble pLista){
         Nodo pNodo=pLista.getHead().getNext();
         Nodo J;
@@ -109,5 +139,13 @@ public class Metodos <dp extends Comparable<? super dp>>{
         }
         for(int i =0; i<totalElements; i++,lastArray--)
             pArray[lastArray]=pArray2[lastArray];
+    }
+    
+    /**
+     * metodo para realizar un quickSort sobre un arreglo con datos enteros.
+     * @param pArray 
+     */
+    public void quickSort(int[] pArray){
+        
     }
 }

@@ -111,6 +111,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
     }
     
     /**
+     * metodo para realizar una busqueda en el arbol AVL.
+     * @param pDato dato para realizar comparaciones
+     * @return retorna una booleano si existe o no el dato.
+     */
+    public boolean search(Comparable pDato){
+        return super.find(pDato, _root);
+    }
+    
+    /**
      * metodo sobreescrito para imprimir en orden los nodos de un arbol
      */
     @Override

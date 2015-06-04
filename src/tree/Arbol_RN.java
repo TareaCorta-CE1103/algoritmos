@@ -19,7 +19,6 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
      * @param pDato  dato perteneciente a la clase NodoB, el nodo que queremos 
      * ingresar.
     }*/
-    
     @Override
     public void insert(Comparable pDato) {
         _root=super.insert(pDato,_root); //To change body of generated methods, choose Tools | Templates.
@@ -129,28 +128,19 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
     }
     
     /**
+     * metodo para realizar una busqueda en el arbol
+     * @param pDato dato para realizar comparaciones 
+     * @return 
+     */
+    public boolean search(Comparable pDato){
+        return super.find(pDato, _root);
+    }
+    
+    /**
      * metodo sobre escrito para impirmir nodos y se usa para casos de prueba.
      */
     @Override
     public void print() {
         super.print(_root); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-     * metodos de prueba.
-     * @param args 
-    public static void main(String[] args) {
-        Arbol_RN Nuevo = new Arbol_RN();
-        NodoB nuevo= new NodoB(6);
-        NodoB nuevo1= new NodoB(7);
-        NodoB nuevo2= new NodoB(8);
-        NodoB nuevo3= new NodoB(9);
-        NodoB nuevo4= new NodoB(10);
-        Nuevo.insert(nuevo);
-        Nuevo.insert(nuevo1);
-        Nuevo.insert(nuevo2);
-        Nuevo.insert(nuevo3);
-        Nuevo.insert(nuevo4);
-        Nuevo.print();
-    } */
+    }    
 }
