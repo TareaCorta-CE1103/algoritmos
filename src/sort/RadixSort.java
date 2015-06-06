@@ -93,24 +93,6 @@ class radixsort
     int N = 9;				// number of elements in array
     int array[] = {45,25,35,55,21,34,16,17,49};	// initial array allocation
 
-    /*try
-      {
-      // while more numbers in file
-      while( in.nextToken() != java.io.StreamTokenizer.TT_EOF )	
-	{
-	if( N == Size )			// if the array is full
-	  {
-	  array = reallocate(array);    // int the array size
-	  Size *= 2;	
-	  }
-	array[N++] = (int)in.nval;	// put item in array
-	}
-      }
-    catch(IOException e)
-      {
-      System.err.println("*** IOException caught");
-      }
-*/
     Date startTime = new Date();
 
     System.err.println("Sorting started");
