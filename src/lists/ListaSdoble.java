@@ -3,20 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simple;
+package lists;
 
+import sort.Metodos;
 import tree.Constantes;
 
 /**
+ * clase de lista que sive como padre para todas las otras otras clases
+ * que hagan listas o sirvan como bases de datos.
  *
- * @author osboxes
+ * @author osboxes <------asi se llama la maquina virtual en ubuntu
  * @param <dp>
  */
-public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
+public class ListaSdoble <dp extends Comparable<dp>> extends Metodos 
+implements Constantes{
     
     private Nodo _head;
     private Nodo _tail;
-    private int _cont=cero;
     
     /**
      * encola en una lista doble simple los nodos que se ocupen 
@@ -25,13 +28,13 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     public void enQueue(dp dato){
         if (_head==null){
             _head=_tail=new Nodo(dato);
-            _head.setNext(_tail);_tail.setNext(_head);
+            _tail.setPrev(_head);
         }
         else{
             Nodo tmp1=_tail;
             tmp1.setNext( new Nodo(dato));
             _tail=tmp1.getNext();
-            _tail.setNext(_head);
+            _tail.setPrev(tmp1);
         }
     }
     
@@ -59,76 +62,67 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
      */
     public void deQueue(dp dato){
         Nodo tmp=_head;
-        Nodo tmp2= tmp;
-        _cont=cero;
-        while(_cont<dos && !tmp.getData().equals(dato)){
+        Nodo tmp2=tmp;
+        while(tmp!=null && !tmp.getData().equals(dato)){
             tmp2=tmp;
             tmp=tmp.getNext();
         }
-        if(_cont==dos)
+        if(tmp==null)
             return;
-        else if(tmp==_head){
-            _tail.setNext(_head.getNext());
+        else if(tmp==tmp2){
             _head=_head.getNext();
+            _head.setPrev(null);
         }
-        else
-            tmp2.setNext(tmp.getNext());
+        else{
+            Nodo next= tmp.getNext();
+            tmp2.setNext(next);
+            next.setPrev(tmp2);
+        }
     }
     
     /**
      * metodo para devolver la cantidad numerica de datos encontrados 
      * en la lista 
-     * @return i dato entero que devuelve la maxima cantidad de datos;
+     * @return i;
      */
     public int getLength(){
         Nodo tmp=_head;
         int i =cero;
-        while(_cont<=dos){
-            if(tmp==_head)
-                _cont++;
+        while(tmp!=null){
             i++;
             tmp= tmp.getNext();
         }
-        return i-uno;
+        return i;
     }
     
-    /**
-     * funcion para imprimir todos los nodos de una lista.
-     */
     public void print(){
         Nodo tmp=_head;
-        System.out.println(tmp.getData());
-        tmp=tmp.getNext();
-        while(_cont<uno){
-            if(tmp==_head)
-                _cont++;
-            if(_cont<1){
-                System.out.println(tmp.getData());
-                tmp=tmp.getNext();
-            }
+        while(tmp!=null){
+            System.out.println(tmp.getData());
+            tmp=tmp.getNext();
         }
-        _cont=cero;
     }
-    
     /**
      * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
      * devuelve el valor del nodo.
      * @param dato
      * @return 
      */
-    public boolean find(dp dato){
+    public dp find(dp dato){
         Nodo tmp =_head;
-        while(_cont<dos && !tmp.getData().equals(dato)){
-            if(tmp==_head)
-                _cont++;
+        while(tmp!=null && !tmp.getData().equals(dato))
             tmp=tmp.getNext();
-        }
-        if(_cont<2){
-            _cont=cero;
-            return true;
-        }
+        if (tmp!=null)
+            return (dp)tmp.getData();
         else
-            return false;
+            return null;
     }
     
+    /**
+     * metodo para realizar un ordenamiento de la lista, cuando ya se tienen 
+     * todos los valores ingresados.
+     */
+    public void insertSort(){
+        super.insertSort(this); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simple;
+package lists;
 
 import tree.Constantes;
 import static tree.Constantes.cero;
 
 /**
- *
+ * clase para crear listas circulares dobles.
  * @author osboxes
- * @param <dp>
+ * @param <dp> parametro para recibir datos genericos.
  */
 public class ListaCircularD <dp extends Comparable<dp>> implements Constantes {
     

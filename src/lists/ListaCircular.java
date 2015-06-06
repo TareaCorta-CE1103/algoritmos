@@ -3,31 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simple;
+package lists;
 
 import tree.Constantes;
 
 /**
- *
+ * clase que crea una lista circular simple.
  * @author osboxes
- * @param <dp>
+ * @param <dp> parametro para que la lista pueda recibir cualquier tipo de dato.
  */
-public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
+public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     
     private Nodo _head;
     private Nodo _tail;
+    private int _cont=cero;
     
     /**
      * encola en una lista doble simple los nodos que se ocupen 
      * @param dato 
      */
     public void enQueue(dp dato){
-        if (_head==null)
+        if (_head==null){
             _head=_tail=new Nodo(dato);
+            _head.setNext(_tail);_tail.setNext(_head);
+        }
         else{
             Nodo tmp1=_tail;
             tmp1.setNext( new Nodo(dato));
-            _tail=(Nodo)tmp1.getNext();
+            _tail=tmp1.getNext();
+            _tail.setNext(_head);
         }
     }
     
@@ -55,15 +59,18 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
      */
     public void deQueue(dp dato){
         Nodo tmp=_head;
-        Nodo tmp2=tmp;
-        while(tmp!=null && !tmp.getData().equals(dato)){
+        Nodo tmp2= tmp;
+        _cont=cero;
+        while(_cont<dos && !tmp.getData().equals(dato)){
             tmp2=tmp;
             tmp=tmp.getNext();
         }
-        if(tmp==null)
+        if(_cont==dos)
             return;
-        else if(tmp==tmp2 && tmp.getData().equals(dato))
+        else if(tmp==_head){
+            _tail.setNext(_head.getNext());
             _head=_head.getNext();
+        }
         else
             tmp2.setNext(tmp.getNext());
     }
@@ -71,35 +78,57 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     /**
      * metodo para devolver la cantidad numerica de datos encontrados 
      * en la lista 
-     * @return i;
+     * @return i dato entero que devuelve la maxima cantidad de datos;
      */
     public int getLength(){
         Nodo tmp=_head;
         int i =cero;
-        while(tmp!=null){
+        while(_cont<=dos){
+            if(tmp==_head)
+                _cont++;
             i++;
             tmp= tmp.getNext();
         }
-        return i;
+        return i-uno;
     }
     
+    /**
+     * funcion para imprimir todos los nodos de una lista.
+     */
     public void print(){
         Nodo tmp=_head;
-        while(tmp!=null){
-            System.out.println(tmp.getData());
-            tmp=tmp.getNext();
+        System.out.println(tmp.getData());
+        tmp=tmp.getNext();
+        while(_cont<uno){
+            if(tmp==_head)
+                _cont++;
+            if(_cont<1){
+                System.out.println(tmp.getData());
+                tmp=tmp.getNext();
+            }
         }
+        _cont=cero;
     }
+    
     /**
      * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
      * devuelve el valor del nodo.
      * @param dato
      * @return 
      */
-    public dp find(dp dato){
+    public boolean find(dp dato){
         Nodo tmp =_head;
-        while(tmp!=null||tmp.getData().equals(dato))
+        while(_cont<dos && !tmp.getData().equals(dato)){
+            if(tmp==_head)
+                _cont++;
             tmp=tmp.getNext();
-        return (dp)tmp.getData();
+        }
+        if(_cont<2){
+            _cont=cero;
+            return true;
+        }
+        else
+            return false;
     }
+    
 }

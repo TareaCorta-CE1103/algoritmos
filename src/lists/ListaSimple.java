@@ -3,20 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package simple;
+package lists;
 
-import sort.Metodos;
 import tree.Constantes;
 
 /**
- * clase de lista que sive como padre para todas las otras otras clases
- * que hagan listas o sirvan como bases de datos.
- *
- * @author osboxes <------asi se llama la maquina virtual en ubuntu
- * @param <dp>
+ * clase para crear listas simple.
+ * @author osboxes
+ * @param <dp> parametro para hacer que la lista reciba un dato generico.
  */
-public class ListaSdoble <dp extends Comparable<dp>> extends Metodos 
-implements Constantes{
+public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     
     private Nodo _head;
     private Nodo _tail;
@@ -26,15 +22,12 @@ implements Constantes{
      * @param dato 
      */
     public void enQueue(dp dato){
-        if (_head==null){
+        if (_head==null)
             _head=_tail=new Nodo(dato);
-            _tail.setPrev(_head);
-        }
         else{
             Nodo tmp1=_tail;
             tmp1.setNext( new Nodo(dato));
-            _tail=tmp1.getNext();
-            _tail.setPrev(tmp1);
+            _tail=(Nodo)tmp1.getNext();
         }
     }
     
@@ -69,15 +62,10 @@ implements Constantes{
         }
         if(tmp==null)
             return;
-        else if(tmp==tmp2){
+        else if(tmp==tmp2 && tmp.getData().equals(dato))
             _head=_head.getNext();
-            _head.setPrev(null);
-        }
-        else{
-            Nodo next= tmp.getNext();
-            tmp2.setNext(next);
-            next.setPrev(tmp2);
-        }
+        else
+            tmp2.setNext(tmp.getNext());
     }
     
     /**
@@ -95,6 +83,9 @@ implements Constantes{
         return i;
     }
     
+    /**
+     * metodo para imprimir todos los valores internos de los nodos.
+     */
     public void print(){
         Nodo tmp=_head;
         while(tmp!=null){
@@ -102,6 +93,7 @@ implements Constantes{
             tmp=tmp.getNext();
         }
     }
+    
     /**
      * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
      * devuelve el valor del nodo.
@@ -110,29 +102,8 @@ implements Constantes{
      */
     public dp find(dp dato){
         Nodo tmp =_head;
-        while(tmp!=null && !tmp.getData().equals(dato))
+        while(tmp!=null||tmp.getData().equals(dato))
             tmp=tmp.getNext();
-        if (tmp!=null)
-            return (dp)tmp.getData();
-        else
-            return null;
-    }
-    
-    public void insertSort(){
-        super.insertSort(this); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public static void main(String[] args) {
-        ListaSdoble nuevo = new ListaSdoble();
-        nuevo.enQueue(5);
-        nuevo.enQueue(14);
-        nuevo.enQueue(78);
-        nuevo.enQueue(34);
-        nuevo.enQueue(3);
-        nuevo.enQueue(1);
-        nuevo.enQueue(56);
-        nuevo.enQueue(7);
-        nuevo.insertSort();
-        nuevo.print();
+        return (dp)tmp.getData();
     }
 }
