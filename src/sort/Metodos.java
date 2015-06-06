@@ -5,15 +5,14 @@
  */
 package sort;
 
-import simple.ListaSdoble;
-import simple.Nodo;
+import lists.ListaSdoble;
+import lists.Nodo;
 
 /**
- *
+ * clase para realizar metodos de ordenamiento.
  * @author osboxes
- * @param <dp>
  */
-public class Metodos <dp extends Comparable<? super dp>>{
+public class Metodos <dp extends Comparable<dp>>{
     
     /**
      * metodo para realizar un ordenamiento tipo burbuja
@@ -29,15 +28,19 @@ public class Metodos <dp extends Comparable<? super dp>>{
     }
     
     /**
-     * metodo para realizar un intercambio de datos.
-     * @param pArray arreglo sobre el cual trabajamos.
-     * @param first dato primero a cambiar.
-     * @param last dato segundo a cambiar.
+     * metodo para realizar un ordenamiento por medio de seleccion en un arreglo
+     * @param pArray recibe el arreglo sobre el cual se realizaran el 
+     * ordenamiento.
      */
-    private void swap(int[] pArray, int first, int last){
-        int temp= pArray[first];
-        pArray[first]=pArray[last];
-        pArray[last]=temp;
+    public void selectionSort(int[] pArray){
+        int out, in, min;
+        for(out=0; out<pArray.length-1; out++){
+            min=out;
+            for(in=out+1; in<pArray.length; in++)
+                if(pArray[in]<pArray[min])
+                    min = in;
+        swap(pArray,out, min);
+        }
     }
     
     /**
@@ -92,7 +95,6 @@ public class Metodos <dp extends Comparable<? super dp>>{
      * @param lastPlace posicion inicial de la segunda parte del arreglo
      */
     private void mergeSort(int[] pArray, int[] pArray2,int initPlace,int lastPlace){
-        
         if (initPlace<lastPlace){
             int media= (initPlace+lastPlace)/2;
             mergeSort(pArray, pArray2, initPlace, media);
@@ -112,7 +114,6 @@ public class Metodos <dp extends Comparable<? super dp>>{
      */
     private void merge(int[] pArray, int[] pArray2, int initArray1, int initArray2, 
             int lastArray){
-        
         int finalIzq=initArray2-1;
         int tmpPos= initArray1;
         int totalElements= (lastArray-initArray1)+1;
@@ -146,6 +147,73 @@ public class Metodos <dp extends Comparable<? super dp>>{
      * @param pArray 
      */
     public void quickSort(int[] pArray){
+        quickSort(pArray, 0, pArray.length-1);
         
+    }
+    
+    /**
+     * metodo recursivo que va realizando un quicksort a medida que particiona 
+     * el arreglo.
+     * @param pArray el arreglo con el cual se esta trabajando
+     * @param initArray el primero numero de la porcion del arreglo que vamos a 
+     * analizar.
+     * @param lastArray el ultimo numero del arreglo que vamos a analizar
+     */
+    private void quickSort(int [] pArray, int initArray, int lastArray){
+        if(lastArray-initArray <=0)
+            return;
+        int pivot= pArray[lastArray];
+        int medium= getMediumSorted(pArray, initArray, lastArray, pivot);
+        quickSort(pArray, initArray, medium-1);
+        quickSort(pArray, medium+1, lastArray);
+    }
+    
+    /**
+     * metodo que para hacer un ordenamiento y escojer el dato medio del arreglo 
+     * sobre el cual estamos operando.
+     * @param pArray arreglo sobre el cual operaremos.
+     * @param initArrya dato inicial del arreglo sobre el cual operamos.
+     * @param lastArray dato final del arreglo sobre el cual operamos. 
+     * @param pivot dato pivote sobre el cual compararemos para ir ordenando.
+     * @return retorna el dato mas medio del arreglo.
+     */
+    private int getMediumSorted(int[] pArray, int initArrya, int lastArray, int pivot){
+        int leftPtr = initArrya-1;
+        int rightPtr = lastArray;
+        while(true){
+            while(pArray[++leftPtr] < pivot )
+                ;
+            while(rightPtr>0 && pArray[--rightPtr]>pivot)
+                ;
+            if(leftPtr>=rightPtr)
+                break;
+            swap(pArray,leftPtr,rightPtr);
+        }
+        swap(pArray,leftPtr,lastArray);
+        return leftPtr;
+    }
+    
+    /**
+     * metodo para realizar un intercambio de datos.
+     * @param pArray arreglo sobre el cual trabajamos.
+     * @param first dato primero a cambiar.
+     * @param last dato segundo a cambiar.
+     */
+    public void swap(int[] pArray, int first, int last){
+        int temp= pArray[first];
+        pArray[first]=pArray[last];
+        pArray[last]=temp;
+    }
+    
+    public static void main(String[] args) {
+        int[] arreglo ={4,6,2,9,13,67,20,11};
+        int[] arreglo2 ={4,6,2,9,13,67,20,11};
+        Metodos nuevo= new Metodos();
+        //long tmp1= System.nanoTime();
+        nuevo.quickSort(arreglo);
+        //long tmp2= System.nanoTime();
+        for(int i=0; i<arreglo.length; i++){
+            System.out.println(arreglo[i]);
+        }
     }
 }

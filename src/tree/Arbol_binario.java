@@ -122,7 +122,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
      * @param pNodo
      * @return un nodoB
      */
-    private NodoB minMax(NodoB pNodo){
+    public NodoB minMax(NodoB pNodo){
         if(pNodo.getHizq()==null)
             return pNodo;
         else if(pNodo.getHizq().getHizq()!=null)
@@ -222,7 +222,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
         if(tmp==null)
             return;
         printIOD(tmp.getHizq());
-        System.out.println(tmp.getDato());
+        System.out.println(tmp.getDato()+ " color:"+tmp.getColor());
         printIOD(tmp.getHder());
     }
     

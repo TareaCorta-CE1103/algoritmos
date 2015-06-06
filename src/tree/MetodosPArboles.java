@@ -6,9 +6,10 @@
 package tree;
 
 /**
- *
+ * clase para utilizacion exclusiva con los arboles, en la manera de lo posible,
+ * no se debe de utilizar.
  * @author osboxes
- * @param <dp>
+ * @param <dp> parametro para recibir datos genericos.
  */
 public class MetodosPArboles <dp> extends Arbol_binario implements Constantes{
     

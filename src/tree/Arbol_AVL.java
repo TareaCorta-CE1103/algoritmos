@@ -8,7 +8,7 @@ package tree;
 /**
  * clase para crear arboles auto-valanceables
  * @author osboxes
- * @param <dp>
+ * @param <dp> parametro para que el arbol pueda recibir cualquier tipo de dato.
  */
 public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
     
