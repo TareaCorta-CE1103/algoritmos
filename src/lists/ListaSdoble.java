@@ -5,7 +5,7 @@
  */
 package lists;
 
-import sort.Metodos;
+import sort.inserSort;
 import tree.Constantes;
 
 /**
@@ -15,7 +15,7 @@ import tree.Constantes;
  * @author osboxes <------asi se llama la maquina virtual en ubuntu
  * @param <dp>
  */
-public class ListaSdoble <dp extends Comparable<dp>> extends Metodos 
+public class ListaSdoble <dp extends Comparable<dp>> extends inserSort 
 implements Constantes{
     
     private Nodo _head;
