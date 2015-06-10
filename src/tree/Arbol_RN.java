@@ -222,6 +222,7 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
         else
             pPadre.setHizq(pNodo);
         pNodo.setPadre(pPadre);
+        check(pNodo);
         return pPadre;
     }
     

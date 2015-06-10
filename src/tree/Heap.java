@@ -9,7 +9,7 @@ package tree;
  *
  * @author osboxes
  */
-public class Heap implements Constantes{
+public class Heap extends MetodosPArboles implements Constantes{
     
     private int _tail=cero;
     private int _MaxSize=uno;
@@ -41,12 +41,7 @@ public class Heap implements Constantes{
     }
     
     private void growArray(){
-        _depthSize++;
-        double newMAxsize= (Math.pow(dos,_depthSize))+_MaxSize;
-        String[] newArreglo= new String[(int)newMAxsize];
-        System.arraycopy(_arreglo, cero, newArreglo, cero, _MaxSize);
-        _MaxSize=(int)newMAxsize;
-        _arreglo=newArreglo;
+        _arreglo=super.growArray(_MaxSize, _arreglo);
     }
     
     private void swap(int pHijo){

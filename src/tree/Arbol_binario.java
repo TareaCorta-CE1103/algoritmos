@@ -151,7 +151,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
     public NodoB delete(dp dato, NodoB pNodo){
         if(pNodo==null)
             return null;
-        else if(find(dato))
+        else if(find(dato,pNodo))
             pNodo=deleteAux(dato, pNodo, null);
         return pNodo;
     }
@@ -165,34 +165,45 @@ public class Arbol_binario <dp extends Comparable<dp>> {
      */
     private NodoB deleteAux(dp dato, NodoB pNodo, NodoB padre){
         if(pNodo.getDato().equals(dato)){
-            if(pNodo.getHizq()==null)
+            if(pNodo.getHizq()==null){
                 return pNodo.getHder();
-            else if (pNodo.getHder()==null)
+            }
+            else if (pNodo.getHder()==null){
                 return pNodo.getHizq();
+            }
             else{
                 NodoB Aux = minMax(pNodo.getHder());
-                if(Aux==pNodo.getHder()){
+                if(Aux==pNodo.getHder()&& Aux.getHizq()==null){
+                    pNodo.getHizq().setPadre(Aux);
                     Aux.setHizq(pNodo.getHizq());
                     return Aux;
                 }
                 NodoB menor= Aux.getHizq();
+                pNodo.getHizq().setPadre(menor);
                 menor.setHizq(pNodo.getHizq());
                 NodoB menor_hder= menor.getHder();
+                pNodo.getHder().setPadre(menor);
                 menor.setHder(pNodo.getHder());
                 pNodo.setHder(menor_hder);
                 if(Aux.getHizq()==menor)
                     Aux.setHizq(menor_hder);
                 else
                     Aux.setHder(menor_hder);
+                if(menor_hder!=null)
+                    menor_hder.setPadre(Aux);
                 return menor;
             }
         }
         else if(pNodo.getDato().compareTo(dato)>0){
             pNodo.setHizq(deleteAux(dato, pNodo.getHizq(), pNodo));
+            if(pNodo.getHizq()!=null)
+                pNodo.getHizq().setPadre(pNodo);
             return pNodo;
         }
         else{
             pNodo.setHder(deleteAux(dato, pNodo.getHder(), pNodo));
+            if(pNodo.getHder()!=null)
+                pNodo.getHder().setPadre(pNodo);
             return pNodo;
         }
     }

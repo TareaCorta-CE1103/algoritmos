@@ -110,6 +110,11 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
         }
     }
     
+    public void delete(Comparable dato){
+        _root=super.delete(dato, _root);
+        check();
+    }
+    
     /**
      * metodo para realizar una busqueda en el arbol AVL.
      * @param pDato dato para realizar comparaciones

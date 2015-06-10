@@ -6,10 +6,10 @@
 package search;
 
 /**
- * clase para realizar busquedas sobre un arreglo de enteros.
+ *
  * @author osboxes
  */
-public class Search {
+public class binari {
     
     /**
      * metodo para realizar un busqueda binaria, basicamente consiste en que, 
@@ -35,20 +35,5 @@ public class Search {
                 lastArray=midium;
         }
         return (pArray[initArray]==dato);
-    }
-    
-    /**
-     * metodo para realizar una busqueda lineal en un arreglo y va comparando 
-     * uno por uno hasta encontrar el dato.
-     * @param pArray arreglo de datos enteros sobre el cual se quiere hacer 
-     * la busqueda.
-     * @param dato datos entero el cual se esta buscando.
-     * @return retorna un true o un false si existe el dato o no.
-     */
-    public boolean lineal(int[] pArray, int dato){
-        for(int i=0; i<pArray.length;i++)
-            if(pArray[i]==dato)
-                return true;
-        return false;
     }
 }

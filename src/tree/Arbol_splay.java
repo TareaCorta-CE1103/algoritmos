@@ -56,6 +56,8 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
      * @param pNodo 
      */
     private void splay(NodoB pNodo){
+        if(pNodo==null)
+            return;
          _root=splayAux(pNodo);
     }
     
@@ -265,13 +267,16 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     @Override
     public void delete(Comparable dato) {
         NodoB tmp= Find(dato);
-        if(_ifPadre){
-            _root=super.delete(dato, _root);
-            splay(tmp.getPadre());
+        if(tmp==_root){
+            _root=delete(dato, _root);
         }
-        else{
+        else if(_ifPadre){
+            NodoB padre= tmp.getPadre();
+            _root=delete(dato, padre);
+            splay(padre);
+        }
+        else
             splay(tmp);
-        }
     }
     
     /**
@@ -292,8 +297,10 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
      * respecto al arbol.
      */
     private NodoB Find(Comparable pDato){
-        if (_root.getDato().compareTo(pDato)==0)
+        if (_root.getDato().compareTo(pDato)==0){
+            _ifPadre=false;
             return _root;
+        }
         else
             return FindAux(_root,pDato);
     }
