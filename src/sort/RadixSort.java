@@ -3,7 +3,7 @@ package sort;
 // author:  Robert Keller
 // purpose: illustrating a very fast sorting program for natural numbers only
 
-class RadixSort{
+public class RadixSort{
     
     /**
       *  Calling radixsort constructor on array of floats sorts the array.
