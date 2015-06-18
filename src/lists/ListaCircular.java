@@ -20,7 +20,7 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * encola en una lista doble simple los nodos que se ocupen 
-     * @param dato 
+     * @param dato dato generico que recibe cualquier cosa
      */
     public void enQueue(dp dato){
         if (_head==null){
@@ -37,7 +37,7 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * devuelve la cabeza de la lista o el primer nodo que se ingreso
-     * @return 
+     * @return retorna una nodos que es la punta a la cola
      */
     public Nodo getHead(){
         return _head;
@@ -45,7 +45,7 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * devuelve la cola de la lista o el ulrimo nodo ingresado
-     * @return 
+     * @return retorna el nodo que es el que apunta a la cola
      */
     public Nodo getTail(){
         return _tail;
@@ -55,7 +55,8 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
      * recive un dato y va buscando en toda lista si existe un nodo 
      * que contenga tal valor, de encontrarlo lo elimina, si no lo encuentra
      * alerta un null.
-     * @param dato 
+     * @param dato dato generico que puede ser cualquiera, segun cumpla con los
+     * tipos de datos anteriormente ingresados
      */
     public void deQueue(dp dato){
         Nodo tmp=_head;
@@ -113,8 +114,8 @@ public class ListaCircular <dp extends Comparable<dp>> implements Constantes{
     /**
      * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
      * devuelve el valor del nodo.
-     * @param dato
-     * @return 
+     * @param dato dato generico, puede ser cualquiera
+     * @return retorna un dato generico, que el dato del nodo que buscabamos
      */
     public boolean find(dp dato){
         Nodo tmp =_head;

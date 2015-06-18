@@ -15,6 +15,15 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
     private NodoB _root;
 
     /**
+     * metodo para devolver la raiz del arbol, por si se ocupa realizar 
+     * recorridos al arbol.
+     * @return retorna un dato de la clase NodoB
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
+    
+    /**
      * metodo para ingresar nodos en el arbol rojo y negro
      * @param pDato  dato perteneciente a la clase NodoB, el nodo que queremos 
      * ingresar.
@@ -167,7 +176,7 @@ public class Arbol_RN  <dp extends Comparable<dp>> extends MetodosPArboles imple
     /**
      * metodo para realizar una busqueda en el arbol
      * @param pDato dato para realizar comparaciones 
-     * @return 
+     * @return retorna un dato booleano si existe o no el dato, true o false.
      */
     public boolean search(Comparable pDato){
         return super.find(pDato, _root);

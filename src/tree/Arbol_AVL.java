@@ -15,6 +15,15 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
     private NodoB _root;
     
     /**
+     * metodo para devolver la raiz del arbol, por si se ocupa realizar 
+     * recorridos al arbol.
+     * @return retorna un dato de la clase NodoB
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
+    
+    /**
      * metodo sobre escrito de la clase padre para ingresar nodos en 
      * un arbol AVL.
      * @param dato dato generico
@@ -110,6 +119,10 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
         }
     }
     
+    /**
+     * metodo sobreescrito del padre para realizar borrados en un arbol AVL.
+     * @param dato dato tipo generico
+     */
     public void delete(Comparable dato){
         _root=super.delete(dato, _root);
         check();

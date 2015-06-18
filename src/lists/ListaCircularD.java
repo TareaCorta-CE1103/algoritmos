@@ -21,7 +21,7 @@ public class ListaCircularD <dp extends Comparable<dp>> implements Constantes {
     
     /**
      * encola en una lista doble simple los nodos que se ocupen 
-     * @param dato 
+     * @param dato dato generico que recibe cualquier cosa
      */
     public void enQueue(dp dato){
         if (_head==null){
@@ -41,7 +41,7 @@ public class ListaCircularD <dp extends Comparable<dp>> implements Constantes {
     
     /**
      * devuelve la cabeza de la lista o el primer nodo que se ingreso
-     * @return 
+     * @return retorna la cabeza la cabeza de la lista
      */
     public Nodo getHead(){
         return _head;
@@ -49,7 +49,7 @@ public class ListaCircularD <dp extends Comparable<dp>> implements Constantes {
     
     /**
      * devuelve la cola de la lista o el ulrimo nodo ingresado
-     * @return 
+     * @return retorna una nodos que es el apunta a la cola
      */
     public Nodo getTail(){
         return _tail;
@@ -59,7 +59,8 @@ public class ListaCircularD <dp extends Comparable<dp>> implements Constantes {
      * recive un dato y va buscando en toda lista si existe un nodo 
      * que contenga tal valor, de encontrarlo lo elimina, si no lo encuentra
      * alerta un null.
-     * @param dato 
+     * @param dato dato generico que puede ser cualquiera, segun cumpla con los
+     * tipos de datos anteriormente ingresados
      */
     public void deQueue(dp dato){
         Nodo tmp=_head;

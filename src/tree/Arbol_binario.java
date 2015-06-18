@@ -15,8 +15,18 @@ public class Arbol_binario <dp extends Comparable<dp>> {
     private NodoB _root;
     
     /**
+     * metodo para devolver la raiz del arbol, por si se ocupa realizar 
+     * recorridos al arbol.
+     * @return retorna un dato de la clase NodoB
+     */
+    public NodoB getRoot(){
+        return _root;
+    }
+    
+    /**
      * metodo para hacer inserciones en un arbol binario
-     * @param dato generico 
+     * @param dato generico, este va a ser el nuevo dato que va a ingresarse en 
+     * el arbol. 
      */
     public void insert(dp dato){
         if (_root==null){
@@ -119,8 +129,8 @@ public class Arbol_binario <dp extends Comparable<dp>> {
     
     /**
      * metodo para devolver el menor de los mayores
-     * @param pNodo
-     * @return un nodoB
+     * @param pNodo recibe un nodo, devuelve el menor de los mayor del nodo.
+     * @return un nodoB, este nodo es el mayor de los menores del nodo.
      */
     public NodoB minMax(NodoB pNodo){
         if(pNodo.getHizq()==null)

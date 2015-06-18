@@ -14,6 +14,8 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     
     private NodoB _root;
     private boolean _ifPadre;
+    
+    
     /**
      * metodo para retornar la raiz y realizar recorridos en el arbol.
      * @return retorna un dato de la clase NodoKeyword, este es la raiz del 
@@ -53,7 +55,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     /**
      * metodo para realizar las verificaciones de si tenemos que rotar los nodos
      * del arbol para que un cierto nodo llegue a la raiz.
-     * @param pNodo 
+     * @param pNodo recibe un nodoB para realizar el metodo splay
      */
     private void splay(NodoB pNodo){
         if(pNodo==null)
@@ -147,7 +149,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     /**
      * metodo especial para cuando se tiene que hacer dos veces una rotacion 
      * a la derecha.
-     * @param pNodo dato de la clase NodoB.
+     * @param pNodo dato de la clase NodoB, es el nodo que queremos que rote.
      */
     private void ZagZag(NodoB pNodo){
         NodoB padre= pNodo.getPadre();
@@ -175,7 +177,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     
     /**
      * metodo privado que permite hacer dos rotaciones hacia la izquierda.
-     * @param pNodo dato de la clase NodoB
+     * @param pNodo dato de la clase NodoB, es el nodo que queremos que rote.
      */
     private void ZigZig(NodoB pNodo){
         NodoB padre= pNodo.getPadre();
@@ -204,7 +206,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     /**
      * metodo para hacer un rotacion entre el hijo y el padre hacia la izquierda
      * y el hijo y el abuelo hacia la derecha.
-     * @param pNodo recibe un dato de la clase de NodoB
+     * @param pNodo dato de la clase NodoB, es el nodo que queremos que rote.
      */
     private void ZigZag(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
@@ -233,7 +235,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     /**
      * metodo para hacer una rotacion hacia la derecha entre el hijo y el padre
      * y una rotacion hacia la izquierda entre el hijo y el abuelo.
-     * @param pNodo 
+     * @param pNodo dato de la clase NodoB, es el nodo que queremos que rote.
      */
     private void ZagZig(NodoB pNodo){
         NodoB abuelo=pNodo.getPadre().getPadre();
@@ -281,7 +283,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
     
     /**
      * metodo para realizar una busqueda en el arbol
-     * @param dato 
+     * @param dato dato de generico, este el nodo que queremos 
      */
     public void search(Comparable dato){
         NodoB tmp = Find(dato);
@@ -317,7 +319,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             _ifPadre=true;
             return pNodo;
         }
-        if(pNodo.getDato().compareTo(pDato)<0){
+        else if(pNodo.getDato().compareTo(pDato)<0){
             if(pNodo.getHder()==null){
                 _ifPadre=false;
                 return pNodo;
@@ -325,7 +327,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
             else
                 return FindAux(pNodo.getHder(), pDato);
         }
-        if(pNodo.getDato().compareTo(pDato)>0){
+        else if(pNodo.getDato().compareTo(pDato)>0){
             if(pNodo.getHizq()==null){
                 _ifPadre=false;
                 return pNodo;

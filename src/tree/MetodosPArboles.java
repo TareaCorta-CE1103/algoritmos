@@ -149,12 +149,12 @@ public class MetodosPArboles <dp> extends Arbol_binario implements Constantes{
     /**
      * metodo para aumentar el tamaño de un arreglo.
      * @param pMaxSize dato tipo entero, este es el largo maximo del arreglo
-     * @param pArreglo dato tipo String[], es el arreglo que se recibe.
+     * @param pArreglo dato tipo int[], es el arreglo que se recibe.
      * @return retorna un arreglo con el tamaño aumentado.
      */
-    public String[] growArray( int pMaxSize, String[] pArreglo){
+    public int[] growArray( int pMaxSize, int[] pArreglo){
         double newMAxsize= (crecimientoArreglo)+pMaxSize;
-        String[] newArreglo= new String[(int)newMAxsize];
+        int[] newArreglo= new int[(int)newMAxsize];
         System.arraycopy(pArreglo, 0, newArreglo, 0, pMaxSize);
         pMaxSize=(int)newMAxsize;
         pArreglo=newArreglo;

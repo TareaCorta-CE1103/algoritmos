@@ -19,7 +19,8 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * encola en una lista doble simple los nodos que se ocupen 
-     * @param dato 
+     * @param dato recibe un dato generico, este va a ser el nuevo que vamos
+     * a encolar en la lista.
      */
     public void enQueue(dp dato){
         if (_head==null)
@@ -33,7 +34,7 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * devuelve la cabeza de la lista o el primer nodo que se ingreso
-     * @return 
+     * @return dato de la clase Nodo, esta es la cabeza de la lista.
      */
     public Nodo getHead(){
         return _head;
@@ -41,7 +42,7 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * devuelve la cola de la lista o el ulrimo nodo ingresado
-     * @return 
+     * @return dato de la clase Nodo, esta es la cola de la lista.
      */
     public Nodo getTail(){
         return _tail;
@@ -51,7 +52,8 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
      * recive un dato y va buscando en toda lista si existe un nodo 
      * que contenga tal valor, de encontrarlo lo elimina, si no lo encuentra
      * alerta un null.
-     * @param dato 
+     * @param dato recibe un dato generico, este va a ser el dato que queremos
+     * eliminar del la lista.
      */
     public void deQueue(dp dato){
         Nodo tmp=_head;
@@ -70,8 +72,8 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     
     /**
      * metodo para devolver la cantidad numerica de datos encontrados 
-     * en la lista 
-     * @return i;
+     * en la lista.
+     * @return un dato entero, este representa el largo de la lista.
      */
     public int getLength(){
         Nodo tmp=_head;
@@ -97,12 +99,13 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     /**
      * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
      * devuelve el valor del nodo.
-     * @param dato
-     * @return 
+     * @param dato recibe un dato generico, este dato sirve para buscar el nodo 
+     * que queremos.
+     * @return retorna el valor del nodo que se encontro.
      */
     public dp find(dp dato){
         Nodo tmp =_head;
-        while(tmp!=null||tmp.getData().equals(dato))
+        while(tmp!=null && tmp.getData().equals(dato))
             tmp=tmp.getNext();
         return (dp)tmp.getData();
     }

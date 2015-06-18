@@ -6,7 +6,7 @@
 package tree;
 
 /**
- *
+ * interface que contiene todos las contantes ocupaba en para las bases de datos
  * @author luis
  */
 public interface Constantes {

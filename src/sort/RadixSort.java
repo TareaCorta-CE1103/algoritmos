@@ -6,16 +6,20 @@ package sort;
 public class RadixSort{
     
     /**
-      *  Calling radixsort constructor on array of floats sorts the array.
-      *  Parameter N is the number of elements to be sorted.
-      *  radixsort works using binary representation of numbers being sorted.
-      * It first sorts on the least-significant bit, then the next least, 
-      * and so on until there are no more bits which have 1 as a value.
-      * On each pass, it counts the number of words with a 0 in the current
-      * bit position.  It then copies the elements from the array into a
-      * buffer so that all words with a 0 precede all with a one.  It then 
-      * copies the buffer back to the array for the next pass.
-     **/
+    * Calling radixsort constructor on array of floats sorts the array.
+    * Parameter N is the number of elements to be sorted.
+    * radixsort works using binary representation of numbers being sorted.
+    * It first sorts on the least-significant bit, then the next least, 
+    * and so on until there are no more bits which have 1 as a value.
+    * On each pass, it counts the number of words with a 0 in the current
+    * bit position.  It then copies the elements from the array into a
+    * buffer so that all words with a 0 precede all with a one.  It then 
+    * copies the buffer back to the array for the next pass.
+    * @param array arreglo con el cual se va a operar, dato tipo
+    * entero.
+    * @param N cantidad de datos con los que se estan trabajando, dato tipo
+    * entero.
+    **/
     public RadixSort(int array[], int N){
         int buffer[]    = new int[N];	// place to put result of one pass
         boolean done = false;		// indicates whether sorting completed
