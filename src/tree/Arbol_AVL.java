@@ -19,7 +19,7 @@ public class Arbol_AVL <dp extends Comparable<dp>> extends MetodosPArboles{
      * recorridos al arbol.
      * @return retorna un dato de la clase NodoB
      */
-    public NodoB getRoot(){
+    public NodoB getRaiz(){
         return _root;
     }
     

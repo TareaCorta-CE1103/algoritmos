@@ -183,7 +183,7 @@ public class Arbol_binario <dp extends Comparable<dp>> {
             }
             else{
                 NodoB Aux = minMax(pNodo.getHder());
-                if(Aux==pNodo.getHder()&& Aux.getHizq()==null){
+                if(Aux==pNodo.getHder()){
                     pNodo.getHizq().setPadre(Aux);
                     Aux.setHizq(pNodo.getHizq());
                     return Aux;

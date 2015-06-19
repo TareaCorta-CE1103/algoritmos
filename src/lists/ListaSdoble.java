@@ -39,6 +39,25 @@ implements Constantes{
     }
     
     /**
+     * metodo especifico para encolar en una lista y las lista que se va 
+     * quedando, finaliza como ordenanda, luego de cada ejecucion.
+     * @param dato dato generico que recibe cualquier cosa
+     */
+    public void insert(dp dato){
+        if (_head==null){
+            _head=_tail=new Nodo(dato);
+            _tail.setPrev(_head);
+        }
+        else{
+            Nodo tmp1=_tail;
+            tmp1.setNext( new Nodo(dato));
+            _tail=tmp1.getNext();
+            _tail.setPrev(tmp1);
+        }
+        insertSort();
+    }
+    
+    /**
      * devuelve la cabeza de la lista o el primer nodo que se ingreso
      * @return retorna la cabeza la cabeza de la lista
      */
@@ -77,7 +96,8 @@ implements Constantes{
         else{
             Nodo next= tmp.getNext();
             tmp2.setNext(next);
-            next.setPrev(tmp2);
+            if(next!=null)
+                next.setPrev(tmp2);
         }
     }
     
