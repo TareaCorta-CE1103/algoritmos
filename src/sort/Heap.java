@@ -12,7 +12,7 @@ import tree.MetodosPArboles;
  * clase para crear heaps, este solo funciona con Strings.
  * @author osboxes
  */
-public class Heap extends MetodosPArboles implements Constantes{
+public class Heap implements Constantes{
     
     private int _tail=cero;
     private int _MaxSize=uno;
@@ -54,13 +54,15 @@ public class Heap extends MetodosPArboles implements Constantes{
         if(_arreglo[pHijo/dos]>(_arreglo[pHijo]))
             swap(pHijo);
     }
-    
     /**
-     * metodo para aumentar el tamaño del arreglo una vez que haya llenado todos
-     * los campos.
+     * metodo para aumentar el tamaño de un arreglo.
      */
-    private void growArray(){
-        _arreglo=super.growArray(_MaxSize, _arreglo);
+    public void growArray(){
+        double newMAxsize= Math.pow(crecimientoArreglo,_MaxSize);
+        int[] newArreglo= new int[(int)newMAxsize];
+        System.arraycopy(_arreglo, 0, newArreglo, 0, _MaxSize);
+        _MaxSize=(int)newMAxsize;
+        _arreglo=newArreglo;
     }
     
     /**

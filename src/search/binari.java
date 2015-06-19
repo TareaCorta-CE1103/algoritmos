@@ -31,8 +31,10 @@ public class binari {
             midium=(lastArray+initArray)/2;
             if(pArray[midium]<dato)
                 initArray=midium+1;
+            else if(pArray[midium]>dato)
+                lastArray=midium-11;
             else
-                lastArray=midium;
+                return true;
         }
         return (pArray[initArray]==dato);
     }
