@@ -33,6 +33,24 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     }
     
     /**
+     * metodo para ingresar dato no repetidos
+     * @param dato dato tipo generico.
+     */
+    public void enQueue_none_repeat(dp dato){
+        Nodo tmp= _head;
+        boolean check= false;
+        while(tmp!=null && !check){
+            if(tmp.getData().equals(dato))
+                check=true;
+            tmp= tmp.getNext();
+        }
+        if(!check){
+            enQueue(dato);
+        }
+            
+    }
+    
+    /**
      * devuelve la cabeza de la lista o el primer nodo que se ingreso
      * @return dato de la clase Nodo, esta es la cabeza de la lista.
      */
@@ -97,16 +115,17 @@ public class ListaSimple <dp extends Comparable<dp>> implements Constantes{
     }
     
     /**
-     * hace casi lo mismo que el metodo de borrado pero no lo elimina, solo
-     * devuelve el valor del nodo.
+     * metodo para buscar nodos es un 
      * @param dato recibe un dato generico, este dato sirve para buscar el nodo 
      * que queremos.
-     * @return retorna el valor del nodo que se encontro.
+     * @return retorna un booleando de si encontro el nodo o no.
      */
-    public dp find(dp dato){
+    public boolean find(dp dato){
         Nodo tmp =_head;
         while(tmp!=null && tmp.getData().equals(dato))
             tmp=tmp.getNext();
-        return (dp)tmp.getData();
+        if(tmp==null)
+            return false;
+        return true;
     }
 }
