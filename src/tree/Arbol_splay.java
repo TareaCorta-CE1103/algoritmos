@@ -274,7 +274,7 @@ public class Arbol_splay <dp extends Comparable<dp>> extends Arbol_binario{
         }
         else if(_ifPadre){
             NodoB padre= tmp.getPadre();
-            _root=delete(dato, padre);
+            _root=delete(dato, tmp);
             splay(padre);
         }
         else
