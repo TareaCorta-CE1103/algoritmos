@@ -54,6 +54,7 @@ public class Heap implements Constantes{
         if(_arreglo[pHijo/dos]>(_arreglo[pHijo]))
             swap(pHijo);
     }
+    
     /**
      * metodo para aumentar el tamaño de un arreglo.
      */
